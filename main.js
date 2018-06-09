@@ -28,8 +28,8 @@ function garboChecker(){
     let next60 = Math.floor((buildings[7].amount+60)/60)*60;
     for (let i = buildings[7].amount; i < next12; i++) sum12 += Math.round(buildings[7].baseCost * Math.pow(buildings[7].exp, i));
     for (let i = buildings[7].amount; i < next60; i++) sum60 += Math.round(buildings[7].baseCost * Math.pow(buildings[7].exp, i));
-    document.getElementById("next12").innerHTML = shortenLargeNumber(sum12);
-    document.getElementById("next60").innerHTML = shortenLargeNumber(sum60);
+    document.getElementById("next12").innerHTML = "$" + shortenLargeNumber(sum12);
+    document.getElementById("next60").innerHTML = "$" + shortenLargeNumber(sum60);
 
 }
 
