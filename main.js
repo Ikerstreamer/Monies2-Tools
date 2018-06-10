@@ -98,5 +98,12 @@ function importSave(str) {
     load()
 }
 
+function winChecker() {
+    if (document.getElementById("discoBGID").style.display === "block") {
+        document.getElementById("discoWinner").textContent = "YOU WIN! "+totalTicks.toString().replace( /\d{1,3}(?=(\d{3})+(?!\d))/g , "$&,")+" Ticks!"
+    }
+}
+
 setInterval(garboChecker, 100);
 setInterval(sacrificeChecker, 100);
+setInterval(winChecker, 100);
