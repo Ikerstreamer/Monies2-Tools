@@ -18,6 +18,12 @@ elem2 = document.createElement("span");
 elem2.id = "next60";
 elem.appendChild(elem2);
 base.insertBefore(elem, base.childNodes[9]);
+sacValue = document.createElement("span");
+sacValue.id = "sacValue";
+document.getElementById("wholeDocument").appendChild(sacValue)
+document.getElementById("sacValue").style.position = "absolute"
+document.getElementById("sacValue").style.left = "257px"
+document.getElementById("sacValue").style.top = "98px"
 
 
 
@@ -33,4 +39,11 @@ function garboChecker(){
 
 }
 
+function sacrificeChecker() {
+    var x = document.getElementById("myMoney5").getBoundingClientRect().x
+    var y = document.getElementById("myMoney5").getBoundingClientRect().y
+    if (player.money_5 > 0) document.getElementById("sacValue").textContent = "+"+((player.money * .000000000000000035) + (player.money_2 * .00000015) + (player.money_3 * .000025) + (player.money_4 * .00000002)).toFixed(2);
+}
+
 setInterval(garboChecker, 100);
+setInterval(sacrificeChecker, 100);
