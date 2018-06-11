@@ -1,20 +1,24 @@
 const itemList = ['player','buildings', 'upg1','upg2','upg3','upg4','upg5','upg6','upg7','upg8', 'upgProgress','upgSeen1','upgSeen2','upgSeen3','upgSeen4','upgSeen5','upgSeen6','upgSeen7','upgSeen8', 'manaDump','mannaDump','moanaDump', 'versionNum','worthMult','totalTick','totalMon','rocketFuel','manaShown', 'showAvaBTN','monPerBuild', 'avaUpgrades','selectedAvaSave','selectedUpgSave','showingInfinite','infDuration']
+var js = document.createElement("script");
+js.type = "text/javascript";
+js.src = "https://cdn.rawgit.com/pieroxy/lz-string/master/libs/lz-string.min.js";
+document.body.appendChild(js);
 
 let base = document.getElementById('bgBuilding8');
 let elem = document.createElement("span");
 elem.className = "digData";
-elem.innerHTML = "Cost for next multiple of";
+elem.textContent = "Cost for next multiple of";
 base.insertBefore(elem, base.childNodes[1]);
 elem = document.createElement("span");
 elem.className = "digData";
-elem.innerHTML = "12: ";
+elem.textContent = "12: ";
 let elem2 = document.createElement("span");
 elem2.id = "next12";
 elem.appendChild(elem2);
 base.insertBefore(elem, base.childNodes[5]);
 elem = document.createElement("span");
 elem.className = "digData";
-elem.innerHTML = "60: ";
+elem.textContent = "60: ";
 elem2 = document.createElement("span");
 elem2.id = "next60";
 elem.appendChild(elem2);
@@ -53,12 +57,22 @@ document.getElementById("wholeDocument").appendChild(exportOutput)
 document.getElementById("exportOutput").style.position = "absolute";
 document.getElementById("exportOutput").style.left = "-9999px";
 
-var js = document.createElement("script");
-js.type = "text/javascript";
-js.src = "https://cdn.rawgit.com/pieroxy/lz-string/master/libs/lz-string.min.js";
-document.body.appendChild(js);
+let tradeValue = document.createElement("span");
+tradeValue.id = "tradeValue";
+tradeValue.className = "digData";
+tradeValue.textContent = "Trade Bonus: ";
+document.getElementById('bgBuilding11').insertBefore(tradeValue, document.getElementById('bgBuilding11').childNodes[9]);
+document.getElementById("tradeValue").style.whiteSpace = "nowrap"
 
-
+function shortenSmallNumber(number){
+    var SI_PREFIXES = ["Thousand", "Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion"];
+    var tier = Math.floor(Math.log10(number) / 3) | 0;
+    if (tier < 1) return number
+    var prefix = SI_PREFIXES[tier-1];
+    var scale = Math.pow(10, tier * 3);
+    var scaled = number / scale;
+    return scaled.toFixed(2) + " "+prefix;
+}
 
 function garboChecker(){
     let sum12 = 0;
@@ -67,8 +81,8 @@ function garboChecker(){
     let next60 = Math.floor((buildings[7].amount+60)/60)*60;
     for (let i = buildings[7].amount; i < next12; i++) sum12 += Math.round(buildings[7].baseCost * Math.pow(buildings[7].exp, i));
     for (let i = buildings[7].amount; i < next60; i++) sum60 += Math.round(buildings[7].baseCost * Math.pow(buildings[7].exp, i));
-    document.getElementById("next12").innerHTML = "$" + shortenLargeNumber(sum12);
-    document.getElementById("next60").innerHTML = "$" + shortenLargeNumber(sum60);
+    document.getElementById("next12").textContent = "$" + shortenLargeNumber(sum12);
+    document.getElementById("next60").textContent = "$" + shortenLargeNumber(sum60);
 
 }
 
@@ -104,6 +118,12 @@ function winChecker() {
     }
 }
 
+function tradeChecker() {
+    if (player.rpcTradeActive) document.getElementById("tradeValue").textContent = "Trade bonus: $"+shortenSmallNumber(getRPCValTrade()-getRPCVal())
+    else document.getElementById("tradeValue").textContent = "Trade Bonus: $0"
+}
+
 setInterval(garboChecker, 100);
 setInterval(sacrificeChecker, 100);
 setInterval(winChecker, 100);
+setInterval(tradeChecker, 100);
