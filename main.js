@@ -96,7 +96,6 @@ function exportSave() {
     var str = ""
     for (let i=0;i<itemList.length;i++) str += localStorage.getItem(itemList[i]) +'|';
     str = LZString.compressToEncodedURIComponent(JSON.stringify(str))
-    console.log(str)
     document.getElementById("exportOutput").textContent = str;
     document.getElementById("exportOutput").focus();
     document.getElementById("exportOutput").select();
@@ -109,6 +108,9 @@ function importSave(str) {
     str = JSON.parse(LZString.decompressFromEncodedURIComponent(str));
     const list = str.split('|')
     for (let i=0;i<itemList.length;i++) localStorage.setItem(itemList[i],list[i]);
+    manaDump = 0;
+    mannaDump = 0;
+    moanaDump = 0;
     load()
 }
 
