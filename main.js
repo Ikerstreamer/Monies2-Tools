@@ -23,6 +23,12 @@ elem2 = document.createElement("span");
 elem2.id = "next60";
 elem.appendChild(elem2);
 base.insertBefore(elem, base.childNodes[9]);
+
+let incomeDiv = document.getElementById('gainer').parentElement;
+elem = document.createElement("span");
+elem.id = "tickPerSec";
+incomeDiv.appendChild(elem);
+
 sacValue = document.createElement("span");
 sacValue.id = "sacValue";
 document.getElementById("wholeDocument").appendChild(sacValue);
@@ -91,6 +97,12 @@ function sacrificeChecker() {
     else document.getElementById("sacValue").textContent = ""
 }
 
+function tickSpeedDisp() {
+    let warp = buildings[7] % 2 == 0;
+    let tickSpeed = Math.round(player.updSpd * (warp ? player.timeWarpMulti : 1)) / 1000;
+    document.getElementById("tickPerSec").textContent = "Tick speed:" + tickSpeed + "s";
+}
+
 function exportSave() {
     save()
     var str = ""
@@ -129,3 +141,4 @@ setInterval(garboChecker, 100);
 setInterval(sacrificeChecker, 100);
 setInterval(winChecker, 100);
 setInterval(tradeChecker, 100);
+setInterval(tickSpeedDisp, 100);
