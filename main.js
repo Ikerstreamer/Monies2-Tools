@@ -98,9 +98,9 @@ function sacrificeChecker() {
 }
 
 function tickSpeedDisp() {
-    let warp = buildings[7] % 2 == 0;
-    let tickSpeed = Math.round(player.updSpd * (warp ? player.timeWarpMulti : 1)) / 1000;
-    document.getElementById("tickPerSec").textContent = "Tick speed:" + tickSpeed + "s";
+    let warp = buildings[7].amount % 2 == 0;
+    let tickSpeed = Math.round(player.updTime * (warp ? player.timeWarpValue : 1)) / 1000;
+    document.getElementById("tickPerSec").textContent = "Tick speed: " + tickSpeed + "s";
 }
 
 function exportSave() {
