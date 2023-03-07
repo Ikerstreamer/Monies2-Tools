@@ -13,4 +13,4 @@ Tells you your current trade bonus on red paper clips.
 
 
 Paste this into your console to start the script:
-(document.head.appendChild(document.createElement('script')).src="https://ikerstreamer.github.io/Monies2-Tools/main.js")
+document.head.appendChild(document.createElement("script")).src="https://ikerstreamer.github.io/Monies2-Tools/main.js")
