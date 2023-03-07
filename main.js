@@ -98,7 +98,7 @@ function sacrificeChecker() {
 }
 
 function tickSpeedDisp() {
-    let warp = buildings[7].amount % 2 == 0;
+    let warp = buildings[7].amount > 0 && buildings[7].amount % 2 == 0;
     let tickSpeed = Math.round(player.updTime * (warp ? player.timeWarpValue : 1)) / 1000;
     document.getElementById("tickPerSec").textContent = "Tick speed: " + tickSpeed + "s";
 }
